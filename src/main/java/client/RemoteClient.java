@@ -7,11 +7,11 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Date;
 
-public class RemoteClient extends Client {
+public abstract class RemoteClient extends Client {
     private InetAddress address;
     private int port;
 
-    public RemoteClient(InetAddress address, int port, Targa targa, String marca) {
+    public RemoteClient(InetAddress address, int port, String targa, String marca) {
         super(targa, marca);
         this.address = address;
         this.port = port;
@@ -42,7 +42,6 @@ public class RemoteClient extends Client {
         return false;
     }
     private boolean helper(ContentMessage cm) throws IOException {
-        HandshakeMessage hm = new HandshakeMessage(getTarga().getTarghe());
         Socket serverSocket = null;
         OutputStream output = null;
         boolean success;
@@ -53,7 +52,6 @@ public class RemoteClient extends Client {
         }
         output = serverSocket.getOutputStream();
         PrintWriter writer = new PrintWriter(output,true);
-        writer.println(hm.toString());
         writer.println(cm.toString());
         success = recvACK(serverSocket);
         serverSocket.close();

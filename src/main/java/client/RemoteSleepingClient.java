@@ -1,5 +1,4 @@
 package client;
-import common.Targa;
 import java.net.InetAddress;
 import java.util.Random;
 
@@ -8,7 +7,7 @@ public class RemoteSleepingClient extends RemoteClient implements Runnable {
     private int maxSleepTime;
 
 
-    public RemoteSleepingClient(InetAddress address, int port, Targa targa, String marca, int maxSleepTime) {
+    public RemoteSleepingClient(InetAddress address, int port, String targa, String marca, int maxSleepTime) {
         super(address, port, targa, marca);
         this.maxSleepTime = maxSleepTime;
     }

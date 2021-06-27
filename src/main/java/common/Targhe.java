@@ -32,9 +32,9 @@ public class Targhe {
         this.lastCharCode = Integer.parseInt(split[2]);
     }
 
-    public Targa nextTarga(){
+    public String nextTarga(){
         increment(length-1);
-        return new Targa(this, String.valueOf(arr));
+        return String.valueOf(arr);
     }
 
     private boolean nextChar(int i){
@@ -78,15 +78,5 @@ public class Targhe {
             return false;
         Targhe targhe = (Targhe) obj;
         return this.toString().equals(targhe.toString());
-    }
-
-    public Targa random(){
-        String str;
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i=0; i<length; ++i) {
-            stringBuilder.append ((char) ((int)Math.random() * (lastCharCode - firstCharCode) + firstCharCode));
-        }
-        str = stringBuilder.toString();
-        return new Targa(this, str);
     }
 }
