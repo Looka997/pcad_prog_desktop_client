@@ -79,4 +79,14 @@ public class Targhe {
         Targhe targhe = (Targhe) obj;
         return this.toString().equals(targhe.toString());
     }
+
+    public Targa random(){
+        String str;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i=0; i<length; ++i) {
+            stringBuilder.append ((char) ((int)Math.random() * (lastCharCode - firstCharCode) + firstCharCode));
+        }
+        str = stringBuilder.toString();
+        return new Targa(this, str);
+    }
 }

@@ -1,18 +1,33 @@
 package client;
 
 
+import common.Brands;
+import common.Targa;
+import common.Targhe;
+
 import java.awt.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import javax.swing.*;
 
 public class ClientGUI {
     final static boolean RIGHT_TO_LEFT = false;
+    private RemoteClient client;
+
+    public ClientGUI() throws UnknownHostException {
+        this(new RemoteClient(InetAddress.getLocalHost(), 8080, new Targhe().random(), Brands.random().name()));
+    }
+
+    public ClientGUI(RemoteClient Client){
+
+    }
 
     public static void addComponentsToPane(Container pane) {
         if (RIGHT_TO_LEFT) {
             pane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         }
 
-        JButton button;
+        JButton enterButton, exitButton;
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -26,24 +41,26 @@ public class ClientGUI {
         textArea.setEditable(false);
         pane.add(textArea, c);
 
-        button = new JButton("Enter");
+        enterButton = new JButton("Enter");
         c.gridy = 1;
         c.gridx = 0;
         c.ipady = 10;   // y padding for both buttons
         c.ipadx = 7;    // x padding for both buttons
         c.insets = new Insets(0,16,0,8);
-        pane.add(button, c);
+        pane.add(enterButton, c);
 
         JTextField textField = new JTextField(6);
         c.gridx = 1;
         c.insets = new Insets(0,8,0,16);
         pane.add(textField,c);
 
-        button = new JButton("Exit");
+        exitButton = new JButton("Exit");
         c.gridx = 0;
         c.gridy = 2;
         c.insets = new Insets(16,16,16,8);
-        pane.add(button, c);
+        pane.add(exitButton, c);
+
+        enterButton.addActionListener(new EnterListener(enterButton, textField, exitButton));
 
     }
 
