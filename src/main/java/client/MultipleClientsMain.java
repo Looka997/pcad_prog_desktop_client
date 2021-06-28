@@ -10,11 +10,8 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* This client should be customized to fit the needs, for instance by sending manual requests
-   through an UI.
-. */
 
-public class ClientMain {
+public class MultipleClientsMain {
     public static void main(String[] args) throws IOException {
         int nClients = 10, maxSleepTime =  10;
         ArrayList<RemoteSleepingClient> clients = new ArrayList<>();

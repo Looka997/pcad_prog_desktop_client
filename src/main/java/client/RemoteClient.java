@@ -7,7 +7,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Date;
 
-public abstract class RemoteClient extends Client {
+public class RemoteClient extends Client {
     private InetAddress address;
     private int port;
 
