@@ -2,7 +2,7 @@ package client;
 import java.net.InetAddress;
 import java.util.Random;
 
-public class RemoteSleepingClient extends RemoteClient implements Runnable {
+public class RemoteSleepingClient extends RemoteClient {
 
     private int maxSleepTime;
 

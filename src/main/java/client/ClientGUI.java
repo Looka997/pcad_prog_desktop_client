@@ -61,7 +61,7 @@ public class ClientGUI extends JFrame {
         c.ipadx = 10;
         pane.add(button, c);
 
-        button.addActionListener(new RegisterListener(plateTxt,brandList));
+        button.addActionListener(new RegisterListener(plateTxt,brandList, addr, port));
     }
 
     private void createAndShowGUI() {
