@@ -55,7 +55,7 @@ public class RegisterListener implements ActionListener {
         pane.repaint();
         pane.validate();
 
-        enterButton.addActionListener(new EnterListener(pl_str, br_str, enterButton, textField, exitButton, addr, port));
+        enterButton.addActionListener(new EnterListener(pl_str, br_str, enterButton, textField, exitButton, textArea, addr, port));
     }
 
     @Override
