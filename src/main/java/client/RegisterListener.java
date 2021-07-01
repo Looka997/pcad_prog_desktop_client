@@ -1,5 +1,8 @@
 package client;
 
+import client.cmdlisteners.EnterListener;
+import client.cmdlisteners.ExitListener;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -52,10 +55,12 @@ public class RegisterListener implements ActionListener {
         c.gridy = 2;
         c.insets = new Insets(16, 16, 16, 8);
         pane.add(exitButton, c);
+        exitButton.setEnabled(false);
         pane.repaint();
         pane.validate();
 
-        enterButton.addActionListener(new EnterListener(pl_str, br_str, enterButton, textField, exitButton, textArea, addr, port));
+        enterButton.addActionListener(new EnterListener(pl_str, br_str, enterButton, exitButton,textField, textArea, addr, port));
+        exitButton.addActionListener(new ExitListener(pl_str, br_str, enterButton, exitButton,textField, textArea, addr, port));
     }
 
     @Override
