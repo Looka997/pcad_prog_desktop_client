@@ -5,6 +5,7 @@ import common.*;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.time.Instant;
 import java.util.Date;
 
 public abstract class RemoteClient extends Client implements Runnable {
@@ -61,7 +62,7 @@ public abstract class RemoteClient extends Client implements Runnable {
     @Override
     public boolean park(){
         ContentMessage cm;
-        cm = new ContentMessage(TipoRichiesta.ENTRATA, getTarga(), getMarca(), new Date());
+        cm = new ContentMessage(TipoRichiesta.ENTRATA, getTarga(), getMarca(), Instant.now());
         try {
             return helper(cm);
         } catch (IOException e) {
@@ -73,7 +74,7 @@ public abstract class RemoteClient extends Client implements Runnable {
     @Override
     public boolean unpark() {
         ContentMessage cm;
-        cm = new ContentMessage(TipoRichiesta.USCITA, getTarga(), getMarca(), new Date());
+        cm = new ContentMessage(TipoRichiesta.USCITA, getTarga(), getMarca(), Instant.now());
         try {
             return helper(cm);
         } catch (IOException e) {

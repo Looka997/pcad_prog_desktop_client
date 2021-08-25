@@ -1,57 +1,56 @@
 package common;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.Instant;
+import java.util.Objects;
 
 public class ContentMessage {
 
-    private TipoRichiesta tipoRichiesta;
-    private String targa;
-    private String marca;
-    private Date date;
-    private static final String dateFormat = "EEE MMM d HH:mm:ss zzz yyyy";
-    private static SimpleDateFormat dateFormatter = new SimpleDateFormat(dateFormat);
+    private TipoRichiesta request;
+    private String plate;
+    private String brand;
+    private Instant date;
 
+    private void checkArguments(){
+        Objects.requireNonNull(date);
+        if (plate.equals(""))
+            throw new IllegalArgumentException("plate must not be empty");
+    }
 
-    public ContentMessage(TipoRichiesta tipoRichiesta, String targa, String marca, Date date){
-        this.tipoRichiesta = tipoRichiesta;
-        this.targa = targa;
+    public ContentMessage(TipoRichiesta request, String plate, String brand, Instant date){
+        this.request = request;
+        this.plate = plate;
         this.date = date;
-        this.marca = marca;
+        this.brand = Brands.valueOf(brand).name();
+        checkArguments();
+    }
+    public ContentMessage(TipoRichiesta request, String plate, String brand){
+        this(request, plate, brand, Instant.now());
     }
     @Override
     public String toString() {
-        return tipoRichiesta.name() + "," + targa.toString() + "," + marca + "," + date.toString() + "\n";
+        return request.name() + "," + plate.toString() + "," + brand + "," + date.toString() + "\n";
     }
 
     public synchronized static ContentMessage fromString(String str){
         String[] split = str.split(",");
         if (split.length != 4)
-            throw new IllegalArgumentException("usage: $TipoRichiesta,$Targa,$Date");
-        String date_str = split[3];
-        Date date = null;
-        try {
-            date = dateFormatter.parse(date_str);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return new ContentMessage(TipoRichiesta.valueOf(split[0]), split[1], split[2], date);
+            throw new IllegalArgumentException("usage: $TipoRichiesta,$Targa,$Instant");
+        return new ContentMessage(TipoRichiesta.valueOf(split[0]), split[1], split[2], Instant.parse(split[3]));
     }
 
-    public String getTarga() {
-        return targa;
+    public String getPlate() {
+        return plate;
     }
 
-    public Date getDate() {
+    public Instant getDate() {
         return date;
     }
 
     public TipoRichiesta getTipoRichiesta() {
-        return tipoRichiesta;
+        return request;
     }
 
-    public String getMarca() {
-        return marca;
+    public String getBrand() {
+        return brand;
     }
 }
