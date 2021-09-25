@@ -4,8 +4,7 @@ import java.util.Random;
 
 public class Targhe {
     private static int length = 6;
-    private static char[] arr = new char[length];
-    private static boolean init = false;
+    private static final char[] arr = new char[length];
     private static int firstCharCode;
     private static int lastCharCode;
 
@@ -29,9 +28,9 @@ public class Targhe {
         String[] split = str.split(",");
         if (split.length != 3)
             throw new IllegalArgumentException("usage: $length,$firstCharCode,$lastCharCode");
-        this.length = Integer.parseInt(split[0]);
-        this.firstCharCode = Integer.parseInt(split[1]);
-        this.lastCharCode = Integer.parseInt(split[2]);
+        length = Integer.parseInt(split[0]);
+        firstCharCode = Integer.parseInt(split[1]);
+        lastCharCode = Integer.parseInt(split[2]);
     }
 
     public String nextTarga(){

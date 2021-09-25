@@ -5,10 +5,10 @@ import java.util.Objects;
 
 public class ContentMessage {
 
-    private TipoRichiesta request;
-    private String plate;
-    private String brand;
-    private Instant date;
+    private final TipoRichiesta request;
+    private final String plate;
+    private final String brand;
+    private final Instant date;
 
     private void checkArguments(){
         Objects.requireNonNull(date);
