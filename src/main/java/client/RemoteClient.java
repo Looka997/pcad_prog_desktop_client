@@ -61,7 +61,7 @@ public abstract class RemoteClient extends Client implements Runnable {
     @Override
     public boolean park(){
         ContentMessage cm;
-        cm = new ContentMessage(TipoRichiesta.ENTRATA, getTarga(), getMarca(), Instant.now());
+        cm = new ContentMessage(TipoRichiesta.ENTRATA, getPlate(), getBrand(), Instant.now());
         try {
             return helper(cm);
         } catch (IOException e) {
@@ -73,7 +73,7 @@ public abstract class RemoteClient extends Client implements Runnable {
     @Override
     public boolean unpark() {
         ContentMessage cm;
-        cm = new ContentMessage(TipoRichiesta.USCITA, getTarga(), getMarca(), Instant.now());
+        cm = new ContentMessage(TipoRichiesta.USCITA, getPlate(), getBrand(), Instant.now());
         try {
             return helper(cm);
         } catch (IOException e) {
