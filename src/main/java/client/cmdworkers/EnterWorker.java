@@ -19,7 +19,7 @@ public class EnterWorker extends CommandWorker {
     }
 
     @Override
-    protected Boolean doInBackground() throws Exception {
+    protected Boolean doInBackground() {
 
         new RemoteClient(addr, port, plate, brand) {
             @Override
@@ -30,7 +30,6 @@ public class EnterWorker extends CommandWorker {
                     return;
                 }
                 textArea.append(plate + " parked successfully\n");
-                return;
             }
         }.run();
         return !enable;

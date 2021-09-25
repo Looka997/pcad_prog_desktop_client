@@ -5,7 +5,7 @@ import java.net.InetAddress;
 
 public class ScheduledExitWorker extends CommandWorker {
 
-    private int sleeptime;
+    private final int sleeptime;
     public ScheduledExitWorker(String plate, String brand, JTextArea textArea, JButton enterButton, JButton exitButton, JTextField textField, int sleeptime, InetAddress addr, int port) {
         super(plate, brand, textArea, enterButton, exitButton, textField, addr, port);
         this.sleeptime = sleeptime;

@@ -18,7 +18,7 @@ public class ExitWorker extends CommandWorker {
         this.skipDone = skipDone;
     }
     @Override
-    protected Boolean doInBackground() throws Exception {
+    protected Boolean doInBackground() {
 
         new RemoteClient(addr, port, plate, brand) {
             @Override
@@ -29,7 +29,6 @@ public class ExitWorker extends CommandWorker {
                 }
                 textArea.append(plate + " unparked successfully\n");
                 enable = true;
-                return;
             }
         }.run();
         return enable;
