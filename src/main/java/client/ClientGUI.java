@@ -11,9 +11,8 @@ import javax.swing.*;
 
 public class ClientGUI extends JFrame {
     final static boolean RIGHT_TO_LEFT = false;
-    private RemoteClient client;
-    private InetAddress addr;
-    private int port;
+    private final InetAddress addr;
+    private final int port;
 
     public ClientGUI(InetAddress addr, int port){
         Objects.requireNonNull(addr);

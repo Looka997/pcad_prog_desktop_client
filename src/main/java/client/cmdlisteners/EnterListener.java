@@ -23,9 +23,7 @@ public class EnterListener extends CommandListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (enterWorker != null && schedWorker != null)
-            return;
-        else{
+        if (enterWorker == null || schedWorker == null){
             enterButton.setEnabled(false);
             textField.setEnabled(false);
             if (!textField.getText().equals("")){
@@ -42,7 +40,6 @@ public class EnterListener extends CommandListener {
                 schedWorker = null;
             }else{
                 create_execute_enter();
-                return;
             }
         }
 

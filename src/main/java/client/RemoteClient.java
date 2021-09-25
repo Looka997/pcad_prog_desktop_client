@@ -6,14 +6,13 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.time.Instant;
-import java.util.Date;
 
 public abstract class RemoteClient extends Client implements Runnable {
-    private InetAddress address;
-    private int port;
+    private final InetAddress address;
+    private final int port;
 
-    public RemoteClient(InetAddress address, int port, String targa, String marca) {
-        super(targa, marca);
+    public RemoteClient(InetAddress address, int port, String plate, String brand) {
+        super(plate, brand);
         this.address = address;
         this.port = port;
     }
@@ -43,8 +42,8 @@ public abstract class RemoteClient extends Client implements Runnable {
         return false;
     }
     private boolean helper(ContentMessage cm) throws IOException {
-        Socket serverSocket = null;
-        OutputStream output = null;
+        Socket serverSocket;
+        OutputStream output;
         boolean success;
         try {
             serverSocket = new Socket(getAddress(), getPort());

@@ -15,9 +15,7 @@ public class ExitListener extends CommandListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (worker != null)
-            return;
-        else{
+        if (worker == null) {
             exitButton.setEnabled(false);
             worker = new ExitWorker(plate, brand, textArea, enterButton, exitButton, textField, addr, port);
             worker.execute();
