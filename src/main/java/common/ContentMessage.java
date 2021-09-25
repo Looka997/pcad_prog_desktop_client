@@ -28,7 +28,7 @@ public class ContentMessage {
     }
     @Override
     public String toString() {
-        return request.name() + "," + plate.toString() + "," + brand + "," + date.toString() + "\n";
+        return request.name() + "," + plate + "," + brand + "," + date.toString() + "\n";
     }
 
     public synchronized static ContentMessage fromString(String str){
