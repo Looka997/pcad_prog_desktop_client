@@ -2,16 +2,24 @@ package client;
 
 import client.cmdlisteners.EnterListener;
 import client.cmdlisteners.ExitListener;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
+import javax.management.OperationsException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
+import java.net.URL;
 
 public class RegisterListener implements ActionListener {
-    private JTextField plate;
-    private JComboBox brand;
+    private final JTextField plate;
+    private final JComboBox brand;
     private final InetAddress addr;
     private final int port;
 
@@ -20,6 +28,40 @@ public class RegisterListener implements ActionListener {
         brand = brandComboBox;
         this.addr = addr;
         this.port = port;
+    }
+
+    private String getJsonResp() throws OperationsException {
+        try {
+            URL url = new URL("http://" + addr.getHostAddress() + ":4567/users/" + plate.getText());
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String json = in.readLine();
+            JSONTokener tokener = new JSONTokener(json);
+            JSONObject jsonObject = new JSONObject(tokener);
+            String res = (String) jsonObject.get("state");
+            in.close();
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        throw new OperationsException("could not retrieve plate state");
+    }
+
+    private void disableButton(JButton enterButton, JButton exitButton){
+        String state = "";
+        try {
+            state = getJsonResp();
+        } catch (OperationsException e) {
+            e.printStackTrace();
+        }
+        if (state.equals(""))
+            return;
+        if (state.equals("UNSET") || state.equals("USCITA"))
+            exitButton.setEnabled(false);
+        else if (state.equals("ENTRATA"))
+            enterButton.setEnabled(false);
     }
 
     private void modifyGui(String pl_str, String br_str){
@@ -55,7 +97,7 @@ public class RegisterListener implements ActionListener {
         c.gridy = 2;
         c.insets = new Insets(16, 16, 16, 8);
         pane.add(exitButton, c);
-        exitButton.setEnabled(false);
+        disableButton(enterButton, exitButton);
         pane.repaint();
         pane.validate();
 
