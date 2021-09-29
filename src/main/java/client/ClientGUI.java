@@ -10,7 +10,6 @@ import java.util.Objects;
 import javax.swing.*;
 
 public class ClientGUI extends JFrame {
-    final static boolean RIGHT_TO_LEFT = false;
     private final InetAddress addr;
     private final int port;
 
@@ -21,9 +20,6 @@ public class ClientGUI extends JFrame {
     }
 
     public void addComponentsToPane(Container pane) {
-        if (RIGHT_TO_LEFT) {
-            pane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        }
         pane.setPreferredSize(new Dimension(510, 450));
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
