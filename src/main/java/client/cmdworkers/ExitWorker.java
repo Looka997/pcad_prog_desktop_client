@@ -42,6 +42,6 @@ public class ExitWorker extends CommandWorker {
             enterButton.setEnabled(true);
             textField.setEnabled(true);
         } else
-            exitButton.setEnabled(true);
+            refresh();
     }
 }

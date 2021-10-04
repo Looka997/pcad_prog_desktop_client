@@ -2,6 +2,7 @@ package client.cmdworkers;
 
 import client.RemoteClient;
 
+import javax.management.OperationsException;
 import javax.swing.*;
 import java.net.InetAddress;
 
@@ -40,8 +41,7 @@ public class EnterWorker extends CommandWorker {
         if (skipDone)
             return;
         if (enable){
-            enterButton.setEnabled(true);
-            textField.setEnabled(true);
+            refresh();
         }
         else
             exitButton.setEnabled(true);
