@@ -59,6 +59,7 @@ public abstract class CommandWorker extends SwingWorker<Boolean, Void> {
                 exitButton.setEnabled(true);
                 enterButton.setEnabled(false);
                 textField.setEnabled(false);
+                return;
             }
                 exitButton.setEnabled(false);
                 enterButton.setEnabled(true);
